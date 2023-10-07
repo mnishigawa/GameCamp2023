@@ -40,7 +40,7 @@ namespace game
             }
             if(inputStatus.DOWN == true)
             {
-                MoveAxis.x -= MoveSpeed * Time.deltaTime;
+                MoveAxis.y -= MoveSpeed * Time.deltaTime;
             }
             if(inputStatus.LEFT == true)
             {
@@ -48,7 +48,7 @@ namespace game
             }
             if(inputStatus.RIGHT == true)
             {
-                MoveAxis.y += MoveSpeed * Time.deltaTime;
+                MoveAxis.x += MoveSpeed * Time.deltaTime;
             }
             if(inputStatus.FIRE == true)
             {

@@ -53,13 +53,6 @@ namespace game
 
         public InputStatus GetInputStatus(game.GameMain.PlayerIndex playerIndex)
         {
-            Debug.Log("GetInputStatus index : " + playerIndex);
-            Debug.Log("UP : " + PlayerInputStatusList[(int)playerIndex].UP);
-            Debug.Log("LEFT : " + PlayerInputStatusList[(int)playerIndex].LEFT);
-            Debug.Log("RIGHT : " + PlayerInputStatusList[(int)playerIndex].RIGHT);
-            Debug.Log("DOWN : " + PlayerInputStatusList[(int)playerIndex].DOWN);
-            Debug.Log("FIRE : " + PlayerInputStatusList[(int)playerIndex].FIRE);
-
             return PlayerInputStatusList[(int)playerIndex];
         }
 
