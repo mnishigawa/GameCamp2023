@@ -28,6 +28,7 @@ namespace game
             if(FireFlag == true)
             {
                 Fire();
+                FireFlag = false;
             }
         }
         

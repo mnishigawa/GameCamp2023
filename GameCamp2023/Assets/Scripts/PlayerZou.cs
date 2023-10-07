@@ -18,8 +18,9 @@ public class PlayerZou : game.PlayerBase
         GameObject obj = Instantiate(bulletobj);
         obj.transform.position = transform.position;
 
+        // 発射方向の設定
         game.Bullet bullet = obj.GetComponent<game.Bullet>();
-        bullet.Initialize(game.Bullet.BulletAngle.RIGHT);
+        bullet.SetAngle(game.Bullet.BulletAngle.DOWN);
     }
 
     // 接触処理
