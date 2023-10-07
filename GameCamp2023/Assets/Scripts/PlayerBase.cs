@@ -39,35 +39,55 @@ namespace game
         // 移動処理 GameMainのUpdateから呼ばれる
         public virtual void Move(game.PlayerInput.InputStatus inputStatus, Tilemap tileMap)
         {
-            Vector3 MoveAxis = new Vector3();
-            MoveAxis = Vector3.zero;
+            Vector3 MoveAmount = new Vector3();
+            MoveAmount = Vector3.zero;
             if(inputStatus.UP == true)
             {
-                MoveAxis.y += MoveSpeed * Time.deltaTime;
+                MoveAmount.y += MoveSpeed * Time.deltaTime;
             }
             if(inputStatus.DOWN == true)
             {
-                MoveAxis.y -= MoveSpeed * Time.deltaTime;
+                MoveAmount.y -= MoveSpeed * Time.deltaTime;
             }
             if(inputStatus.LEFT == true)
             {
-                MoveAxis.x -= MoveSpeed * Time.deltaTime;
+                MoveAmount.x -= MoveSpeed * Time.deltaTime;
             }
             if(inputStatus.RIGHT == true)
             {
-                MoveAxis.x += MoveSpeed * Time.deltaTime;
+                MoveAmount.x += MoveSpeed * Time.deltaTime;
             }
             if(inputStatus.FIRE == true)
             {
                 FireFlag = true;
             }
 
+            Vector3 movedPosition = MoveAmount + transform.position;
+
+            Vector3Int cellPosition = tileMap.WorldToCell(movedPosition);
+
+            var targetTile = tileMap.GetTile(cellPosition);
+            
+            if(targetTile.name == "Wall" || targetTile.name == "OuterWall")
+            {
+                return;
+            }
+
+            transform.Translate(MoveAmount.x, MoveAmount.y, 0.0f, Space.Self);
+        }
+
+        public string GetCurrentTileName()
+        {
             Vector3Int cellPosition = tileMap.WorldToCell(transform.position);
 
-            //tileMap.SetTile(cellPosition, redTile);
-            
-            transform.Translate(MoveAxis.x, MoveAxis.y, 0.0f, Space.Self);
+            var targetTile = tileMap.GetTile(cellPosition);
 
+            if(targetTile == null)
+            {
+                return string.Empty;
+            }
+
+            return targetTile.name;
         }
 
         protected virtual void Fire()
