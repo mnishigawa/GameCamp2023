@@ -26,14 +26,19 @@ namespace game
 
         }
 
+        public void Initialize(BulletAngle angle)
+        {
+            bulletAngle = angle;
+        }
+
         // Update is called once per frame
         void Update()
         {
             Vector3 MoveAxis = new Vector3();
             MoveAxis = Vector3.zero;
 
-            MoveAxis.x += Mathf.Sin(Mathf.PI * (int)bulletAngle) * MoveSpeed * Time.deltaTime;
-            MoveAxis.y += Mathf.Cos(Mathf.PI * (int)bulletAngle) * MoveSpeed;
+            MoveAxis.x += Mathf.Sin(Mathf.PI * (float)bulletAngle * 0.5f) * MoveSpeed * Time.deltaTime;
+            MoveAxis.y += Mathf.Cos(Mathf.PI * (float)bulletAngle * 0.5f) * MoveSpeed;
 
             transform.Translate(MoveAxis.x, MoveAxis.y, 0.0f, Space.Self);
         }
