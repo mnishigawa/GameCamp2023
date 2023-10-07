@@ -167,7 +167,7 @@ namespace game
             {
                 InputStatusList[(int)InputType.P1FIRE] = true;
             }
-            if(context.canceled)
+            else
             {
                 InputStatusList[(int)InputType.P1FIRE] = false;
             }

@@ -11,6 +11,9 @@ namespace game
         // 移動速度
         public float MoveSpeed = 1f;
 
+        // 当たり判定範囲
+        public float CollsionOffset = 0.2f;
+
         // 弾発射フラグ
         private bool FireFlag;
 
@@ -64,17 +67,37 @@ namespace game
             }
 
             Vector3 movedPosition = MoveAmount + transform.position;
+            
+            // 移動後が壁の中にならないか判定
+            // x軸を判定
+            Vector3 offset = new Vector3(CollsionOffset, 0, 0);
+            if(GetIsWall(movedPosition + offset) || GetIsWall(movedPosition - offset))
+            {
+                // x軸が引っ掛かったのでx軸移動値を0にする
+                MoveAmount.x = 0f;
+            }
+            // y軸を判定
+            offset = new Vector3(0, CollsionOffset, 0);
+            if(GetIsWall(movedPosition + offset) || GetIsWall(movedPosition - offset))
+            {
+                // y軸が引っ掛かったのでy軸移動量を0にする
+                MoveAmount.y = 0f;
+            }
 
-            Vector3Int cellPosition = tileMap.WorldToCell(movedPosition);
+            transform.Translate(MoveAmount.x, MoveAmount.y, 0.0f, Space.Self);
+        }
+
+        private bool GetIsWall(Vector3 playerPosition)
+        {
+            Vector3Int cellPosition = tileMap.WorldToCell(playerPosition);
 
             var targetTile = tileMap.GetTile(cellPosition);
             
             if(targetTile.name == "Wall" || targetTile.name == "OuterWall")
             {
-                return;
+                return true;
             }
-
-            transform.Translate(MoveAmount.x, MoveAmount.y, 0.0f, Space.Self);
+            return false;
         }
 
         public string GetCurrentTileName()
