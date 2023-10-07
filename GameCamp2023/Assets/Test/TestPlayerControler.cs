@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,21 +8,21 @@ public class TestPlayerControler : MonoBehaviour
 
 
     [SerializeField]
-    float fMoveValue = 0.01f; // ˆÚ“®‘¬“x
+    float fMoveValue = 0.01f; // ç§»å‹•é€Ÿåº¦
 
     [SerializeField]
-    Tilemap tilemap;    // ƒ^ƒCƒ‹ƒ}ƒbƒv‚ÌƒIƒuƒWƒFƒNƒg
+    Tilemap tilemap;    // ã‚¿ã‚¤ãƒ«ãƒžãƒƒãƒ—ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
     [SerializeField]
-    Tile redTile;       // Ô‚¢ƒ^ƒCƒ‹‚ÌƒIƒuƒWƒFƒNƒg
+    Tile redTile;       // èµ¤ã„ã‚¿ã‚¤ãƒ«ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
     [SerializeField]
-    Sprite sprite;      // ƒXƒvƒ‰ƒCƒg‚ÌƒIƒuƒWƒFƒNƒg
+    Sprite sprite;      // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
-    Vector3 move;       // ˆÚ“®—Ê
+    Vector3 move;       // ç§»å‹•é‡
 
     //=================================================
-    // ‰Šú‰»ˆ—
+    // åˆæœŸåŒ–å‡¦ç†
     //=================================================
     void Start()
     {
@@ -30,121 +30,121 @@ public class TestPlayerControler : MonoBehaviour
     }
 
     //=================================================
-    // XVˆ—
+    // æ›´æ–°å‡¦ç†
     //=================================================
     void Update()
     {
 
 #if true
-        // ƒL[ƒ{[ƒh‘€ì
+        // ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰æ“ä½œ
         ControllKeyboard();
 
-        // ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ðƒZƒ‹À•W‚É•ÏŠ·
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’ã‚»ãƒ«åº§æ¨™ã«å¤‰æ›
         Vector3Int cellPosition = tilemap.WorldToCell(transform.position);
 
-        // ƒZƒ‹À•W‚ÉÔ‚¢ƒ^ƒCƒ‹‚ðÝ’è
+        // ã‚»ãƒ«åº§æ¨™ã«èµ¤ã„ã‚¿ã‚¤ãƒ«ã‚’è¨­å®š
         tilemap.SetTile(cellPosition, redTile);
 #endif
 
-        // ƒ[ƒJƒ‹À•WˆÚ“®
+        // ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ç§»å‹•
         transform.Translate(move.x, move.y, 0.0f, Space.Self);
     }
 
     //=================================================
-    // ƒL[ƒ{[ƒh‘€ì
+    // ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰æ“ä½œ
     //=================================================
     private void ControllKeyboard()
     {
         if (Input.GetKey(KeyCode.A))
-        {// A‚ª‰Ÿ‚³‚ê‚Ä‚½‚ç, ¶ˆÚ“®
+        {// AãŒæŠ¼ã•ã‚Œã¦ãŸã‚‰, å·¦ç§»å‹•
 
             if (Input.GetKey(KeyCode.S))
-            {// S‚ª‰Ÿ‚³‚ê‚Ä‚½‚ç, ¶‰ºˆÚ“®
+            {// SãŒæŠ¼ã•ã‚Œã¦ãŸã‚‰, å·¦ä¸‹ç§»å‹•
 
                 move.x += Mathf.Sin(Mathf.PI * -0.75f) * fMoveValue;
                 move.y += Mathf.Cos(Mathf.PI * -0.75f) * fMoveValue;
             }
             else if (Input.GetKey(KeyCode.W))
-            {// W‚ª‰Ÿ‚³‚ê‚Ä‚½‚ç, ¶ãˆÚ“®
+            {// WãŒæŠ¼ã•ã‚Œã¦ãŸã‚‰, å·¦ä¸Šç§»å‹•
 
                 move.x += Mathf.Sin(Mathf.PI * -0.25f) * fMoveValue;
                 move.y += Mathf.Cos(Mathf.PI * -0.25f) * fMoveValue;
             }
             else
-            {// A‚ª‰Ÿ‚³‚ê‚Ä‚½‚ç, ¶ˆÚ“®
+            {// AãŒæŠ¼ã•ã‚Œã¦ãŸã‚‰, å·¦ç§»å‹•
 
                 move.x += Mathf.Sin(Mathf.PI * -0.5f) * fMoveValue;
                 move.y += Mathf.Cos(Mathf.PI * -0.5f) * fMoveValue;
             }
         }
         else if (Input.GetKey(KeyCode.D))
-        {// D‚ª‰Ÿ‚³‚ê‚Ä‚½‚ç, ‰EˆÚ“®
+        {// DãŒæŠ¼ã•ã‚Œã¦ãŸã‚‰, å³ç§»å‹•
 
             if (Input.GetKey(KeyCode.S))
-            {// S‚ª‰Ÿ‚³‚ê‚Ä‚½‚ç, ‰E‰ºˆÚ“®
+            {// SãŒæŠ¼ã•ã‚Œã¦ãŸã‚‰, å³ä¸‹ç§»å‹•
 
                 move.x += Mathf.Sin(Mathf.PI * 0.75f) * fMoveValue;
                 move.y += Mathf.Cos(Mathf.PI * 0.75f) * fMoveValue;
             }
             else if (Input.GetKey(KeyCode.W))
-            {// W‚ª‰Ÿ‚³‚ê‚Ä‚½‚ç, ‰EãˆÚ“®
+            {// WãŒæŠ¼ã•ã‚Œã¦ãŸã‚‰, å³ä¸Šç§»å‹•
 
                 move.x += Mathf.Sin(Mathf.PI * 0.25f) * fMoveValue;
                 move.y += Mathf.Cos(Mathf.PI * 0.25f) * fMoveValue;
             }
             else
-            {// A‚ª‰Ÿ‚³‚ê‚Ä‚½‚ç, ‰EˆÚ“®
+            {// AãŒæŠ¼ã•ã‚Œã¦ãŸã‚‰, å³ç§»å‹•
 
                 move.x += Mathf.Sin(Mathf.PI * 0.5f) * fMoveValue;
                 move.y += Mathf.Cos(Mathf.PI * 0.5f) * fMoveValue;
             }
         }
         else if (Input.GetKey(KeyCode.W))
-        {// W‚ª‰Ÿ‚³‚ê‚Ä‚½‚ç, ãˆÚ“®
+        {// WãŒæŠ¼ã•ã‚Œã¦ãŸã‚‰, ä¸Šç§»å‹•
 
             move.x += Mathf.Sin(Mathf.PI * 0.0f) * fMoveValue;
             move.y += Mathf.Cos(Mathf.PI * 0.0f) * fMoveValue;
         }
         else if (Input.GetKey(KeyCode.S))
-        {// S‚ª‰Ÿ‚³‚ê‚Ä‚½‚ç, ‰ºˆÚ“®
+        {// SãŒæŠ¼ã•ã‚Œã¦ãŸã‚‰, ä¸‹ç§»å‹•
 
             move.x += Mathf.Sin(Mathf.PI * 1.0f) * fMoveValue;
             move.y += Mathf.Cos(Mathf.PI * 1.0f) * fMoveValue;
         }
 
-        // Šµ«•â³
+        // æ…£æ€§è£œæ­£
         move.x += (0.0f - move.x) * 0.25f;
         move.y += (0.0f - move.y) * 0.25f;
     }
 
-    // ƒ]ƒE‚ªƒEƒj’×‚·A‘¼‚ªH‚×H‚×‚ç‚ê
+    // ã‚¾ã‚¦ãŒã‚¦ãƒ‹æ½°ã™ã€ä»–ãŒé£Ÿã¹é£Ÿã¹ã‚‰ã‚Œ
     void OnTriggerEnter2D(Collider2D collision)
-    {// ‰½‚©‚É“–‚½‚Á‚½
+    {// ä½•ã‹ã«å½“ãŸã£ãŸ
         int n = 0;
     }
 
-    // ƒ]ƒE‚ª…‚Ìã‚É‚¢‚éŽž—p
+    // ã‚¾ã‚¦ãŒæ°´ã®ä¸Šã«ã„ã‚‹æ™‚ç”¨
     void OnTriggerStay2D(Collider2D collision)
-    {// ‰½‚©‚É“–‚½‚Á‚½
+    {// ä½•ã‹ã«å½“ãŸã£ãŸ
         int n = 0;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        // ƒ^ƒCƒ‹”»’è(Ž¸”sƒJƒ‚)
+        // ã‚¿ã‚¤ãƒ«åˆ¤å®š(å¤±æ•—ã‚«ãƒ¢)
 #if false
         foreach (var pos in tilemap.cellBounds.allPositionsWithin)
         {
-            // Žæ‚èo‚µ‚½ˆÊ’uî•ñ‚©‚çƒ^ƒCƒ‹ƒ}ƒbƒv—p‚ÌˆÊ’uî•ñ(ƒZƒ‹À•W)‚ðŽæ“¾
+            // å–ã‚Šå‡ºã—ãŸä½ç½®æƒ…å ±ã‹ã‚‰ã‚¿ã‚¤ãƒ«ãƒžãƒƒãƒ—ç”¨ã®ä½ç½®æƒ…å ±(ã‚»ãƒ«åº§æ¨™)ã‚’å–å¾—
             Vector3Int cellPosition = new Vector3Int(pos.x, pos.y, pos.z);
 
-            // tilemap.HasTile->ƒ^ƒCƒ‹‚ªÝ’è(•`‰æ)‚³‚ê‚Ä‚¢‚éÀ•W‚Å‚ ‚é‚©”»’è
+            // tilemap.HasTile->ã‚¿ã‚¤ãƒ«ãŒè¨­å®š(æç”»)ã•ã‚Œã¦ã„ã‚‹åº§æ¨™ã§ã‚ã‚‹ã‹åˆ¤å®š
             if (tilemap.HasTile(cellPosition))
             {
-                // ƒXƒvƒ‰ƒCƒg‚ªˆê’v‚µ‚Ä‚¢‚é‚©”»’è
+                // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒä¸€è‡´ã—ã¦ã„ã‚‹ã‹åˆ¤å®š
                 if (tilemap.GetSprite(cellPosition) == sprite)
                 {
-                    // “Á’è‚ÌƒXƒvƒ‰ƒCƒg‚Æˆê’v‚µ‚Ä‚¢‚éê‡‚Í•Ê‚Ìƒ^ƒCƒ‹‚ðÝ’è‚·‚é
+                    // ç‰¹å®šã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã¨ä¸€è‡´ã—ã¦ã„ã‚‹å ´åˆã¯åˆ¥ã®ã‚¿ã‚¤ãƒ«ã‚’è¨­å®šã™ã‚‹
                     tilemap.SetColor(cellPosition, Color.red);
                 }
             }
