@@ -14,6 +14,8 @@ namespace game
         // 弾発射フラグ
         private bool FireFlag;
 
+        private Tilemap tileMap;
+
         // MonoBehaviourによる初期化処理
         protected virtual void Start()
         {
@@ -29,6 +31,11 @@ namespace game
             }
         }
         
+        public void Initialize(Tilemap tilemap)
+        {
+            tileMap = tilemap;
+        }
+
         // 移動処理 GameMainのUpdateから呼ばれる
         public virtual void Move(game.PlayerInput.InputStatus inputStatus, Tilemap tileMap)
         {

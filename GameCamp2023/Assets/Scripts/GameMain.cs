@@ -28,6 +28,12 @@ namespace game
             // 入力マネージャ　インスタンス生成と初期化
             inputManager = new PlayerInput();
             inputManager.Initialize();
+
+            // プレイヤーの初期化
+            foreach(var player in playerList)
+            {
+                player.Initialize(tilemap);
+            }
         }
 
         // Update is called once per frame
