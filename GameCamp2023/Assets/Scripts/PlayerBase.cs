@@ -36,19 +36,19 @@ namespace game
             MoveAxis = Vector3.zero;
             if(inputStatus.UP == true)
             {
-                MoveAxis.x += MoveSpeed;
+                MoveAxis.y += MoveSpeed * Time.deltaTime;
             }
             if(inputStatus.DOWN == true)
             {
-                MoveAxis.x -= MoveSpeed;
+                MoveAxis.x -= MoveSpeed * Time.deltaTime;
             }
             if(inputStatus.LEFT == true)
             {
-                MoveAxis.y -= MoveSpeed;
+                MoveAxis.x -= MoveSpeed * Time.deltaTime;
             }
             if(inputStatus.RIGHT == true)
             {
-                MoveAxis.x += MoveSpeed;
+                MoveAxis.y += MoveSpeed * Time.deltaTime;
             }
             if(inputStatus.FIRE == true)
             {
