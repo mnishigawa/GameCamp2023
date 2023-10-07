@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace game
 {
@@ -15,7 +16,11 @@ namespace game
             UNI = 2
         }
 
-        public PlayerInput inputManager;
+        private PlayerInput inputManager;
+
+        public Tilemap tilemap;
+
+        public List<PlayerBase> playerList;
 
         // Start is called before the first frame update
         void Start()
@@ -31,9 +36,10 @@ namespace game
             // 入力情報の更新
             inputManager.UpdateInputStatus();
 
-            if (Input.GetKeyDown("space"))
+            // プレイヤー更新
+            for(int i = 0; i < PlayerNum; i++)
             {
-                inputManager.GetInputStatus(PlayerIndex.ZOU);
+                playerList[i].Move(inputManager.GetInputStatus((PlayerIndex)i), tilemap);
             }
         }
     }
