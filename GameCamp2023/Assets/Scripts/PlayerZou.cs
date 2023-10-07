@@ -32,10 +32,10 @@ public class PlayerZou : game.PlayerBase
         if (tileMap.GetTile(cellPosition) != null)
         {
             // 接触タイル名取得
-            string[] name = tileMap.GetTile(cellPosition).name.Split();
+            string name = base.GetCurrentTileName();
 
-            if (name[0].Equals("Wall") == false &&
-                name[0].Equals("OuterWall") == false)
+            if (name.Equals("Wall") == false &&
+                name.Equals("OuterWall") == false)
             {
                 // セル座標にタイルを設定
                 tileMap.SetTile(cellPosition, setTile);
