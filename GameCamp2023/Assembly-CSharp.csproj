@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\PlayerWakame.cs" />
     <Compile Include="Assets\Scripts\GameMain.cs" />
     <Compile Include="Assets\ControlAsset.cs" />
     <Compile Include="Assets\Test\TestPlayerControler.cs" />
