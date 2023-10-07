@@ -114,6 +114,11 @@ namespace game
             return targetTile.name;
         }
 
+        public virtual bool ReplaceTile()
+        {
+            return false;
+        }
+
         protected virtual void Fire()
         {
             // 弾発射

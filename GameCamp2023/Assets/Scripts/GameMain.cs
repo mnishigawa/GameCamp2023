@@ -46,6 +46,7 @@ namespace game
             for(int i = 0; i < PlayerNum; i++)
             {
                 playerList[i].Move(inputManager.GetInputStatus((PlayerIndex)i), tilemap);
+                playerList[i].ReplaceTile();
             }
         }
     }
