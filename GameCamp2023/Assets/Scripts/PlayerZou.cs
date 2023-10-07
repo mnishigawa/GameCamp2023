@@ -8,11 +8,14 @@ public class PlayerZou : game.PlayerBase
     [SerializeField]
     TileBase setTile;   // 設置するタイル
 
+    [SerializeField]
+    game.Bullet bulletobj;
+
     // 弾発射
     protected override void Fire()
     {
         // 弾を生成
-        //GameObject obj = Instantiate(BulletPrefab);
+        //GameObject obj = Instantiate(bulletobj.ga);
         //obj.transform.position = transform.position;
     }
 
