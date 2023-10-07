@@ -5,7 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class PlayerWakame : game.PlayerBase
 {
-    //[]
+    [SerializeField]
+    TileBase setTile;
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,7 +24,7 @@ public class PlayerWakame : game.PlayerBase
             if (name[0].Equals("Wall") == false &&
                 name[0].Equals("OuterWall") == false)
             {
-                //tileMap.SetTile(cellPosition, redTile);
+                tileMap.SetTile(cellPosition, setTile);
             }
         }
     }
