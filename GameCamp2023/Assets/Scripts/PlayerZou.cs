@@ -8,7 +8,6 @@ public class PlayerZou : game.PlayerBase
     [SerializeField]
     TileBase setTile;   // 設置するタイル
 
-
     // 弾発射
     protected override void Fire()
     {
