@@ -14,7 +14,7 @@ namespace game
         // 弾発射フラグ
         private bool FireFlag;
 
-        private Tilemap tileMap;
+        protected Tilemap tileMap;
 
         // MonoBehaviourによる初期化処理
         protected virtual void Start()
