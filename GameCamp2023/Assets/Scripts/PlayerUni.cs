@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlayerWakame : game.PlayerBase
+public class PlayerUni : game.PlayerBase
 {
     [SerializeField]
     TileBase setTile;   // 設置するタイル

@@ -3,14 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlayerWakame : game.PlayerBase
+public class PlayerZou : game.PlayerBase
 {
     [SerializeField]
     TileBase setTile;   // 設置するタイル
 
-    protected override void OnCollisionEnter2D(Collision2D collision)
-    {// タイルとの接触処理
 
+    // 弾発射
+    protected override void Fire()
+    {
+        // 弾を生成
+        //GameObject obj = Instantiate(BulletPrefab);
+        //obj.transform.position = transform.position;
+    }
+
+    // 接触処理
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
         // プレイヤーの位置をセル座標に変換
         Vector3Int cellPosition = tileMap.WorldToCell(transform.position);
 
