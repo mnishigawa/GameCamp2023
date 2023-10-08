@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StaffrollScene.unity
     guid: 40646657bc85bfe448515a467fbb7cc1
+  - enabled: 1
+    path: Assets/Scenes/EndingScene.unity
+    guid: 3adc06706eef87f4d9bc9e21bc50c56b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a091fef95a805864b925d09e79a84216, type: 2}

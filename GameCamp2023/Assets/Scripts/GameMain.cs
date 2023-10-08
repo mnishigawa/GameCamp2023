@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace game
 {
@@ -104,9 +105,11 @@ namespace game
         {
             if(isGameEnd)
             {
-                if(isFinishEventEnd)
+                if (isFinishEventEnd)
                 {
                     // 終了処理
+                    SceneManager.LoadScene("EndingScene", LoadSceneMode.Single);
+                    isFinishEventEnd = false;
                     return;
                 }
 

@@ -22,7 +22,18 @@ namespace ending
         // Start is called before the first frame update
         void Start()
         {
-            endingType = EndingType.ZOUWIN;
+            int nZouScore = game.GameMain.instance.GetScore(game.GameMain.PlayerIndex.ZOU);
+            int nUniScore = game.GameMain.instance.GetScore(game.GameMain.PlayerIndex.UNI);
+
+            if (nZouScore >= nUniScore)
+            {
+                endingType = EndingType.ZOUWIN;
+            }
+            else
+            {
+                endingType = EndingType.UNIWIN;
+            }
+
             foreach (var obj in EndingObject)
             {
                 obj.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
@@ -32,7 +43,6 @@ namespace ending
         // Update is called once per frame
         void Update()
         {
-            //endingType = game.GameMain.instance.エンディング列挙;
             EndingObject[(int)endingType].GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
             if (Input.anyKeyDown)
