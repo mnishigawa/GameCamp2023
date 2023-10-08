@@ -40,7 +40,7 @@ namespace ending
                 switch (endingType)
                 {
                     case EndingType.ZOUWIN: // エンドロールに遷移
-                        SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
+                        SceneManager.LoadScene("StaffrollScene", LoadSceneMode.Single);
                         break;
 
                     case EndingType.UNIWIN:

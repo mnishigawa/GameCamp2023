@@ -16,6 +16,6 @@ public class UI_TitleLogo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, 30.0f * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, 20.0f * Time.deltaTime);
     }
 }

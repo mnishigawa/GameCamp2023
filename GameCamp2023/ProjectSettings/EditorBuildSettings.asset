@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LogoScene.unity
     guid: c3d12ece6ed4f9e42a1e57e6b93a1fb1
+  - enabled: 1
+    path: Assets/Scenes/TitleScene.unity
+    guid: ae48985108738dd4cb9c87f45de1b8a7
+  - enabled: 1
+    path: Assets/Scenes/StaffrollScene.unity
+    guid: 40646657bc85bfe448515a467fbb7cc1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a091fef95a805864b925d09e79a84216, type: 2}

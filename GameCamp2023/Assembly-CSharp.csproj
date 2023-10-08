@@ -60,10 +60,12 @@
     <Compile Include="Assets\Scripts\UI_TitleEnter.cs" />
     <Compile Include="Assets\ControlAsset.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
+    <Compile Include="Assets\Scripts\StaffrollMain.cs" />
     <Compile Include="Assets\Scripts\UI_TitleLogo.cs" />
     <Compile Include="Assets\Scripts\ObjectType.cs" />
     <Compile Include="Assets\Scripts\PlayerUni.cs" />
     <Compile Include="Assets\Test\TestPlayerControler.cs" />
+    <Compile Include="Assets\Scripts\UI_EndingText.cs" />
     <Compile Include="Assets\Scripts\TitleMain.cs" />
     <Compile Include="Assets\Scripts\PlayerZou.cs" />
     <Compile Include="Assets\Scripts\PlayerBase.cs" />
