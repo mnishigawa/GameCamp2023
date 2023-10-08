@@ -33,7 +33,7 @@ public class PlayerUni : game.PlayerBase
         }
     }
 
-    public override bool ReplaceTile()
+    public override string ReplaceTile()
     {// タイルとの接触処理
 
         // プレイヤーの位置をセル座標に変換
@@ -41,7 +41,7 @@ public class PlayerUni : game.PlayerBase
 
         if (tileMap.GetTile(cellPosition) == null)
         {
-            return false;
+            return string.Empty;
         }
 
         // 接触タイル名取得
@@ -51,10 +51,10 @@ public class PlayerUni : game.PlayerBase
         {
             // セル座標にタイルを設定
             tileMap.SetTile(cellPosition, setTile);
-            return true;
+            return name;
         }
 
-        return false;
+        return string.Empty;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

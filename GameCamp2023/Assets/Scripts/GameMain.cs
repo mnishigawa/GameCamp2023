@@ -164,19 +164,28 @@ namespace game
                 {
                     playerList[i].Move(inputManager.GetInputStatus((PlayerIndex)i), tilemap);
                     
-                    if(playerList[i].ReplaceTile())
+                    string tilename = playerList[i].ReplaceTile();
+
+                    if(tilename != string.Empty)
                     {
                         switch(i)
                         {
                             case (int)PlayerIndex.ZOU:
-                            uniScore -= TileScore;
+                                uniScore -= TileScore;
                             break;
                             case (int)PlayerIndex.WAKAME:
-                            wakameScore += TileScore;
+                                wakameScore += TileScore;
                             break;
                             case (int)PlayerIndex.UNI:
-                            uniScore += TileScore;
-                            //wakameScore -= TileScore;
+                                if(tilename == "BaseTile")
+                                {
+                                    uniScore += TileScore;
+                                }
+                                else if(tilename == "BlueTile")
+                                {
+                                    uniScore += TileScore;
+                                    wakameScore -= TileScore;
+                                }
                             break;
                         }
                     }

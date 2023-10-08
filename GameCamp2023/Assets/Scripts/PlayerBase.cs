@@ -88,9 +88,9 @@ namespace game
             transform.Translate(MoveAmount.x, MoveAmount.y, 0.0f, Space.Self);
         }
 
-        public virtual bool ReplaceTile()
+        public virtual string ReplaceTile()
         {
-            return false;
+            return string.Empty;
         }
 
         protected virtual void Fire()

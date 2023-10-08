@@ -27,14 +27,14 @@ public class PlayerZou : game.PlayerBase
     }
 
     // 接触処理
-    public override bool ReplaceTile()
+    public override string ReplaceTile()
     {
         // プレイヤーの位置をセル座標に変換
         Vector3Int cellPosition = tileMap.WorldToCell(transform.position);
 
         if (tileMap.GetTile(cellPosition) == null)
         {
-            return false;
+            return string.Empty;
         }
 
         // 接触タイル名取得
@@ -44,10 +44,10 @@ public class PlayerZou : game.PlayerBase
         {
             // セル座標にタイルを設定
             tileMap.SetTile(cellPosition, setTile);
-            return true;
+            return name;
         }
 
-        return false;
+        return string.Empty;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

@@ -11,7 +11,11 @@ public class PlayerWakame : game.PlayerBase
     [SerializeField]
     GameObject miniWakamePrefab;    // 生成するわかめ
 
-    public override bool ReplaceTile()
+    public int wakameCreateNum = 5;
+
+    public float miniWakameForce = 1f;
+
+    public override string ReplaceTile()
     {// タイルとの接触処理
 
         // プレイヤーの位置をセル座標に変換
@@ -19,7 +23,7 @@ public class PlayerWakame : game.PlayerBase
 
         if (tileMap.GetTile(cellPosition) == null)
         {
-            return false;
+            return string.Empty;
         }
 
         // 接触タイル名取得
@@ -29,10 +33,10 @@ public class PlayerWakame : game.PlayerBase
         {
             // セル座標にタイルを設定
             tileMap.SetTile(cellPosition, setTile);
-            return true;
+            return name;
         }
 
-        return false;
+        return string.Empty;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -44,7 +48,14 @@ public class PlayerWakame : game.PlayerBase
             if(type.type == game.GameMain.ObjectType.WATER)
             {
                 // みにわかめ生成
-                GameObject.Instantiate(miniWakamePrefab, transform.position, Quaternion.identity);
+                Vector2 force = new Vector2();
+                for(int i = 0; i < wakameCreateNum; i++)
+                {
+                    GameObject obj = GameObject.Instantiate(miniWakamePrefab, transform.position, Quaternion.identity);
+                    force.x = Random.Range(-miniWakameForce, miniWakameForce);
+                    force.y = Random.Range(-miniWakameForce, miniWakameForce);
+                    obj.GetComponent<Rigidbody2D>().AddForce(force);
+                }
                 // 水消す
                 Destroy(collision.gameObject);
             } 
