@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\PlayerZou.cs" />
     <Compile Include="Assets\Scripts\PlayerBase.cs" />
     <Compile Include="Assets\Scripts\TitleInput.cs" />
+    <Compile Include="Assets\Scripts\TutorialMain.cs" />
     <Compile Include="Assets\Scripts\EndingMain.cs" />
   </ItemGroup>
   <ItemGroup>
