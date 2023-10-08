@@ -19,15 +19,13 @@ public class PlayerWakame : game.PlayerBase
 
         if (tileMap.GetTile(cellPosition) == null)
         {
-            return true;
+            return false;
         }
 
         // 接触タイル名取得
         string name = game.GameMain.GetCurrentTile(transform.position, tileMap).name;
 
-        if (name.Equals("Wall") == false &&
-            name.Equals("OuterWall") == false &&
-            name.Equals("RedTile") == false)
+        if (name.Equals("BaseTile"))
         {
             // セル座標にタイルを設定
             tileMap.SetTile(cellPosition, setTile);

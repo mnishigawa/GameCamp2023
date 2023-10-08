@@ -34,6 +34,18 @@ namespace game
 
         private bool isGameActive = false;
 
+        private float time;
+
+        private bool isGameEnd = false;
+
+        private bool isInFinishEvent = false;
+
+        private bool isFinishEventEnd = false;
+
+        private int wakameScore;
+
+        private int uniScore;
+
         public Tilemap tilemap;
 
         public List<PlayerBase> playerList;
@@ -43,6 +55,18 @@ namespace game
         public List<Sprite> countDownSprite;
 
         public Image startImage;
+
+        public Text timeText;
+
+        public float TimeLimit = 30f;
+
+        public int TileScore = 10;
+
+        public Image WakameGauge;
+
+        public Image UniGauge;
+
+        public Image FinishImage;
 
         // Start is called before the first frame update
         void Start()
@@ -65,13 +89,51 @@ namespace game
             countDownImage.gameObject.SetActive(false);
             startImage.gameObject.SetActive(false);
             StartCoroutine(StartCountDownCoroutine());
+            time = TimeLimit;
+            timeText.gameObject.SetActive(true);
+            isGameEnd = false;
+            wakameScore = 0;
+            uniScore = 0;
+            FinishImage.gameObject.SetActive(false);
+            isInFinishEvent = false;
+            isFinishEventEnd = false;
         }
 
         // Update is called once per frame
         void Update()
         {
+            if(isGameEnd)
+            {
+                if(isFinishEventEnd)
+                {
+                    // 終了処理
+                    return;
+                }
+
+                if(isInFinishEvent == false)
+                {
+                    StartCoroutine(FinishEventCoroutine());
+                    isInFinishEvent = true;
+                }
+                return;
+            }
+
             if(isGameActive)
             {
+                // 制限時間更新
+                time -= Time.deltaTime;
+                if(time <= 0f)
+                {
+                    timeText.gameObject.SetActive(false);
+                    isGameEnd = true;
+                    return;
+                }
+                else
+                {
+                    int timer = (int)time;
+                    timeText.text = timer.ToString();
+                }
+
                 // 入力情報の更新
                 inputManager.UpdateInputStatus();
 
@@ -79,8 +141,32 @@ namespace game
                 for(int i = 0; i < PlayerNum; i++)
                 {
                     playerList[i].Move(inputManager.GetInputStatus((PlayerIndex)i), tilemap);
-                    playerList[i].ReplaceTile();
+                    
+                    if(playerList[i].ReplaceTile())
+                    {
+                        switch(i)
+                        {
+                            case (int)PlayerIndex.ZOU:
+                            uniScore -= TileScore;
+                            break;
+                            case (int)PlayerIndex.WAKAME:
+                            wakameScore += TileScore;
+                            break;
+                            case (int)PlayerIndex.UNI:
+                            uniScore += TileScore;
+                            //wakameScore -= TileScore;
+                            break;
+                        }
+                    }
                 }
+
+                // スコアゲージ更新
+                Vector2 wakameGaugeSize = WakameGauge.rectTransform.sizeDelta;
+                wakameGaugeSize.x = wakameScore;
+                WakameGauge.rectTransform.sizeDelta = wakameGaugeSize;
+                Vector2 uniGaugeSize = UniGauge.rectTransform.sizeDelta;
+                uniGaugeSize.x = uniScore;
+                UniGauge.rectTransform.sizeDelta = uniGaugeSize;
             }
         }
 
@@ -102,6 +188,32 @@ namespace game
             yield return new WaitForSeconds(1.0f);
             startImage.gameObject.SetActive(false);
             yield break;
+        }
+
+        IEnumerator FinishEventCoroutine()
+        {
+            FinishImage.gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(3.0f);
+
+            FinishImage.gameObject.SetActive(false);
+
+            isFinishEventEnd = true;
+        }
+
+        // スコア取得
+        public int GetScore(PlayerIndex index)
+        {
+            switch(index)
+            {
+                case PlayerIndex.ZOU:
+                case PlayerIndex.WAKAME:
+                    return wakameScore;
+                case PlayerIndex.UNI:
+                    return uniScore;
+                default:
+                    return 0;
+            }
         }
 
         // 指定位置のタイルを取得
