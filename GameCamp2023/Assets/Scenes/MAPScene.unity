@@ -790,7 +790,7 @@ MonoBehaviour:
   FinishImage: {fileID: 728818227}
   bgm: {fileID: 8300000, guid: e255ad6c7cf0e624688e4421dc4afaa5, type: 3}
   finish: {fileID: 8300000, guid: 3e7c13050627a764aaab919c0fa30587, type: 3}
-  countdown: {fileID: 8300000, guid: 3180754a95b667c42a7b6e597aba0e6d, type: 3}
+  countdown: {fileID: 8300000, guid: 3e7c13050627a764aaab919c0fa30587, type: 3}
 --- !u!4 &468606413
 Transform:
   m_ObjectHideFlags: 0
