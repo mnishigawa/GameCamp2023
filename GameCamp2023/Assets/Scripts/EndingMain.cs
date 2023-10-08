@@ -1,6 +1,7 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ending
 {
@@ -14,13 +15,14 @@ namespace ending
         }
 
         [SerializeField]
-        GameObject[] EndingObject;   // ƒ]ƒEƒGƒ“ƒfƒBƒ“ƒO—p
+        GameObject[] EndingObject;   // ã‚¾ã‚¦ã‚¨ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ç”¨
 
-        private EndingType endingType;    // ƒGƒ“ƒfƒBƒ“ƒO‚Ìí—Ş
+        private EndingType endingType;    // ã‚¨ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã®ç¨®é¡
 
         // Start is called before the first frame update
         void Start()
         {
+            endingType = EndingType.ZOUWIN;
             foreach (var obj in EndingObject)
             {
                 obj.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
@@ -30,13 +32,22 @@ namespace ending
         // Update is called once per frame
         void Update()
         {
-
-        }
-
-        public void SetEndingType(EndingType type)
-        {
-            endingType = type;
+            //endingType = game.GameMain.instance.ã‚¨ãƒ³ãƒ‡ã‚£ãƒ³ã‚°åˆ—æŒ™;
             EndingObject[(int)endingType].GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+            if (Input.anyKeyDown)
+            {
+                switch (endingType)
+                {
+                    case EndingType.ZOUWIN: // ã‚¨ãƒ³ãƒ‰ãƒ­ãƒ¼ãƒ«ã«é·ç§»
+                        SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
+                        break;
+
+                    case EndingType.UNIWIN:
+                        SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
+                        break;
+                }
+            }
         }
 
 

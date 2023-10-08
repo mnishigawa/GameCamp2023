@@ -1,11 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_TitleLogo : MonoBehaviour
 {
-    private int AlphaCnt = 0;
-    private const int ADDTIME = 360;
+    [SerializeField]
+    private Vector3 target;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,6 @@ public class UI_TitleLogo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AlphaCnt = (AlphaCnt + 1) % ADDTIME;
-        transform.localScale =  new Vector3(0.5f, 0.5f, 0.5f) + Vector3.one * Mathf.Sin(Mathf.PI * ((float)AlphaCnt / (float)ADDTIME)) * 0.1f;
+        transform.position = Vector3.MoveTowards(transform.position, target, 30.0f * Time.deltaTime);
     }
 }

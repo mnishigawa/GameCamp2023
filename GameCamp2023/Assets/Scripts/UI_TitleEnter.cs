@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ public class UI_TitleEnter : MonoBehaviour
     void Update()
     {
         AlphaCnt = (AlphaCnt + 1) % ADDTIME;
-        // ì_ñ≈èàóù
+        // ÁÇπÊªÖÂá¶ÁêÜ
         GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, Mathf.Sin(Mathf.PI * ((float)AlphaCnt / (float)ADDTIME)));
     }
 }
