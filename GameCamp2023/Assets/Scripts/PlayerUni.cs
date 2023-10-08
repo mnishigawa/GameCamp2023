@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using game;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,6 +11,27 @@ public class PlayerUni : game.PlayerBase
 
     [SerializeField]
     GameObject miniUniPrefab;    // 生成するうに
+
+    public float mogumoguTime;
+
+    // わかめを食べてて移動できない時間
+    private float stopTime;
+
+    public override void Move(PlayerInput.InputStatus inputStatus, Tilemap tileMap)
+    {
+        // 停止時間減算
+        if(stopTime > 0f)
+        {
+            stopTime -= Time.deltaTime;
+        }
+
+        // 停止時間中でなければ移動
+        if(stopTime <= 0f)
+        {
+            stopTime = 0f;
+            base.Move(inputStatus, tileMap);
+        }
+    }
 
     public override bool ReplaceTile()
     {// タイルとの接触処理
@@ -47,6 +69,8 @@ public class PlayerUni : game.PlayerBase
                 GameObject.Instantiate(miniUniPrefab, transform.position, Quaternion.identity);
                 // みにわかめ消す
                 Destroy(collision.gameObject);
+                // もぐもぐタイム開始
+                stopTime = mogumoguTime;
             } 
         }
     }
