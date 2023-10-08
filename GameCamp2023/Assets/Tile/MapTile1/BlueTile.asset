@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlueTile
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 09eba5d3f3fefa84a9c9dcde435d6585, type: 3}
-  m_Color: {r: 0.49393392, g: 1, b: 0.44716978, a: 1}
+  m_Color: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
   m_Transform:
     e00: 1
     e01: 0

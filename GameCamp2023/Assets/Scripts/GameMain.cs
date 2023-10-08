@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 namespace game
 {
@@ -31,9 +32,17 @@ namespace game
 
         private PlayerInput inputManager;
 
+        private bool isGameActive = false;
+
         public Tilemap tilemap;
 
         public List<PlayerBase> playerList;
+
+        public Image countDownImage;
+
+        public List<Sprite> countDownSprite;
+
+        public Image startImage;
 
         // Start is called before the first frame update
         void Start()
@@ -50,20 +59,49 @@ namespace game
             {
                 player.Initialize(tilemap);
             }
+
+            // カウントダウン開始
+            isGameActive = false;
+            countDownImage.gameObject.SetActive(false);
+            startImage.gameObject.SetActive(false);
+            StartCoroutine(StartCountDownCoroutine());
         }
 
         // Update is called once per frame
         void Update()
         {
-            // 入力情報の更新
-            inputManager.UpdateInputStatus();
-
-            // プレイヤー更新
-            for(int i = 0; i < PlayerNum; i++)
+            if(isGameActive)
             {
-                playerList[i].Move(inputManager.GetInputStatus((PlayerIndex)i), tilemap);
-                playerList[i].ReplaceTile();
+                // 入力情報の更新
+                inputManager.UpdateInputStatus();
+
+                // プレイヤー更新
+                for(int i = 0; i < PlayerNum; i++)
+                {
+                    playerList[i].Move(inputManager.GetInputStatus((PlayerIndex)i), tilemap);
+                    playerList[i].ReplaceTile();
+                }
             }
+        }
+
+        IEnumerator StartCountDownCoroutine()
+        {
+            countDownImage.sprite = countDownSprite[0];
+            countDownImage.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+
+            countDownImage.sprite = countDownSprite[1];
+            yield return new WaitForSeconds(1.0f);
+
+            countDownImage.sprite = countDownSprite[2];
+            yield return new WaitForSeconds(1.0f);
+
+            countDownImage.gameObject.SetActive(false);
+            startImage.gameObject.SetActive(true);
+            isGameActive = true;
+            yield return new WaitForSeconds(1.0f);
+            startImage.gameObject.SetActive(false);
+            yield break;
         }
 
         // 指定位置のタイルを取得
