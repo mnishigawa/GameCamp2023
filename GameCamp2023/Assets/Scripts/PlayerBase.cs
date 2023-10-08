@@ -63,6 +63,7 @@ namespace game
             }
             if(inputStatus.FIRE == true)
             {
+                Debug.Log("Fire");
                 FireFlag = true;
             }
 
@@ -71,47 +72,20 @@ namespace game
             // 移動後が壁の中にならないか判定
             // x軸を判定
             Vector3 offset = new Vector3(CollsionOffset, 0, 0);
-            if(GetIsWall(movedPosition + offset) || GetIsWall(movedPosition - offset))
+            if(GameMain.GetIsWall(movedPosition + offset, tileMap) || GameMain.GetIsWall(movedPosition - offset, tileMap))
             {
                 // x軸が引っ掛かったのでx軸移動値を0にする
                 MoveAmount.x = 0f;
             }
             // y軸を判定
             offset = new Vector3(0, CollsionOffset, 0);
-            if(GetIsWall(movedPosition + offset) || GetIsWall(movedPosition - offset))
+            if(GameMain.GetIsWall(movedPosition + offset, tileMap) || GameMain.GetIsWall(movedPosition - offset, tileMap))
             {
                 // y軸が引っ掛かったのでy軸移動量を0にする
                 MoveAmount.y = 0f;
             }
 
             transform.Translate(MoveAmount.x, MoveAmount.y, 0.0f, Space.Self);
-        }
-
-        private bool GetIsWall(Vector3 playerPosition)
-        {
-            Vector3Int cellPosition = tileMap.WorldToCell(playerPosition);
-
-            var targetTile = tileMap.GetTile(cellPosition);
-            
-            if(targetTile.name == "Wall" || targetTile.name == "OuterWall")
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public string GetCurrentTileName()
-        {
-            Vector3Int cellPosition = tileMap.WorldToCell(transform.position);
-
-            var targetTile = tileMap.GetTile(cellPosition);
-
-            if(targetTile == null)
-            {
-                return string.Empty;
-            }
-
-            return targetTile.name;
         }
 
         public virtual bool ReplaceTile()
@@ -122,11 +96,6 @@ namespace game
         protected virtual void Fire()
         {
             // 弾発射
-        }
-
-        protected virtual void OnCollisionEnter2D(Collision2D collision)
-        {
-            // タイルとの接触処理
         }
     }
 }

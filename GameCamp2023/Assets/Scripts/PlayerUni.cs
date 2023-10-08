@@ -8,6 +8,9 @@ public class PlayerUni : game.PlayerBase
     [SerializeField]
     TileBase setTile;   // 設置するタイル
 
+    [SerializeField]
+    GameObject miniUniPrefab;    // 生成するうに
+
     public override bool ReplaceTile()
     {// タイルとの接触処理
 
@@ -20,7 +23,7 @@ public class PlayerUni : game.PlayerBase
         }
 
         // 接触タイル名取得
-        string name = base.GetCurrentTileName();
+        string name = game.GameMain.GetCurrentTile(transform.position, tileMap).name;
 
         if (name.Equals("Wall") == false &&
             name.Equals("OuterWall") == false)
@@ -32,4 +35,20 @@ public class PlayerUni : game.PlayerBase
 
         return false;
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        var type = collision.gameObject.GetComponent<ObjectType>();
+
+        if(type != null)
+        {
+            if(type.type == game.GameMain.ObjectType.MINIWAKAME)
+            {
+                // みにうに生成
+                GameObject.Instantiate(miniUniPrefab, transform.position, Quaternion.identity);
+                // みにわかめ消す
+                Destroy(collision.gameObject);
+            } 
+        }
+    }
+
 }

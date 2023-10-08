@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -19,7 +21,13 @@ namespace game
         }
         private BulletAngle bulletAngle;    // 移動方向
 
-        private float MoveSpeed = 1f;
+        private float LifeTime = 1.0f;
+
+        public float MoveSpeed = 1f;
+
+        public float CollisionOffset = 0.1f;
+
+        public GameObject WaterPrefab;
 
         Tilemap tileMap;
 
@@ -41,39 +49,58 @@ namespace game
         // Update is called once per frame
         void Update()
         {
-            Vector3 MoveAxis = new Vector3();
-            MoveAxis = Vector3.zero;
+            LifeTime -= Time.deltaTime;
+            bool isCreateWater = false;
+            Vector3 MoveAmount = new Vector3();
+            MoveAmount = Vector3.zero;
 
-            MoveAxis.x += Mathf.Sin(Mathf.PI * (float)bulletAngle * 0.5f) * MoveSpeed * Time.deltaTime;
-            MoveAxis.y += Mathf.Cos(Mathf.PI * (float)bulletAngle * 0.5f) * MoveSpeed * Time.deltaTime;
+            // 消滅時間に達していなければ移動　達していれば現在のタイルに水を生成
+            if(LifeTime > 0f)
+            {
+                MoveAmount.x += Mathf.Sin(Mathf.PI * (float)bulletAngle * 0.5f) * MoveSpeed * Time.deltaTime;
+                MoveAmount.y += Mathf.Cos(Mathf.PI * (float)bulletAngle * 0.5f) * MoveSpeed * Time.deltaTime;
 
-            transform.Translate(MoveAxis.x, MoveAxis.y, 0.0f, Space.Self);
+                Vector3 movedPosition = MoveAmount + transform.position;
 
-            // タイルとの判定を取る
+                // 移動後が壁の中なら現在タイルに水を生成して消える
+                // x軸を判定
+                Vector3 offset = new Vector3(CollisionOffset, 0, 0);
+                if(GameMain.GetIsWall(movedPosition + offset, tileMap) || GameMain.GetIsWall(movedPosition - offset, tileMap))
+                {
+                    isCreateWater = true;
+                }
+                // y軸を判定
+                offset = new Vector3(0, CollisionOffset, 0);
+                if(GameMain.GetIsWall(movedPosition + offset, tileMap) || GameMain.GetIsWall(movedPosition - offset, tileMap))
+                {
+                    isCreateWater = true;
+                }
+            }
+            else
+            {
+                isCreateWater = true;
+            }
+
+            if(isCreateWater)
+            {
+                    CreateWater(transform.position);
+                    Destroy(this.gameObject);
+            }
+            else
+            {
+                transform.Translate(MoveAmount.x, MoveAmount.y, 0.0f, Space.Self);
+            }
 
         }
 
-        public string GetCurrentTileName(Vector3 position)
+        private void CreateWater(Vector3 position)
         {
-            Vector3Int cellPosition = tileMap.WorldToCell(position);
-
-            var targetTile = tileMap.GetTile(cellPosition);
-
-            if (targetTile == null)
-            {
-                return string.Empty;
-            }
-
-            return targetTile.name;
+            GameObject.Instantiate(WaterPrefab, position, Quaternion.identity);
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        void OnCollisionEnter2D(Collision2D collision)
         {
-            // ワカメとの接触
-            if (collision.gameObject.name == "Wakame")
-            {
-                // ワカメの増殖
-            }
+            // わかめに当たった際の破棄処理はわかめ側に記述
         }
     }
 }
