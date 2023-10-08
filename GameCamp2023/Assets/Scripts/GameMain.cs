@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,6 +8,8 @@ namespace game
 {
     public class GameMain : MonoBehaviour
     {
+        public static GameMain instance = null;
+
         public const int PlayerNum = 3;
 
         public enum PlayerIndex
@@ -35,6 +38,9 @@ namespace game
         // Start is called before the first frame update
         void Start()
         {
+            instance = this;
+            DontDestroyOnLoad(this);
+
             // 入力マネージャ　インスタンス生成と初期化
             inputManager = new PlayerInput();
             inputManager.Initialize();
