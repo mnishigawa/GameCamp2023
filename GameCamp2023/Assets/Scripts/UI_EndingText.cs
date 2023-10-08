@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ namespace ending
     public class UI_EndingText : MonoBehaviour
     {
         [SerializeField]
-        GameObject[] EndingText;   // ƒGƒ“ƒfƒBƒ“ƒOƒeƒLƒXƒg
+        GameObject[] EndingText;   // ã‚¨ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒ†ã‚­ã‚¹ãƒˆ
 
         private float time;
         private ending.EndingMain.EndingType type;

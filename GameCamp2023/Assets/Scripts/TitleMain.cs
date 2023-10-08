@@ -48,7 +48,7 @@ namespace title
             time += Time.deltaTime;
             if(time >= 1.0f)
             {
-                SceneManager.LoadScene("MAPScene", LoadSceneMode.Single);
+                SceneManager.LoadScene("TutorialScene", LoadSceneMode.Single);
             }
 
         }
