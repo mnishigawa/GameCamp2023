@@ -110,6 +110,11 @@ namespace game
                 InputStatusList[(int)InputType.P3FIRE]
             );
 
+            // Fireのフラグをクリア
+            InputStatusList[(int)InputType.P1FIRE] = false;
+            InputStatusList[(int)InputType.P2FIRE] = false;
+            InputStatusList[(int)InputType.P3FIRE] = false;
+
             // 更新
             PlayerInputStatusList.Clear();
             PlayerInputStatusList.Add(p1inputStatus);
@@ -166,10 +171,6 @@ namespace game
             if(context.started)
             {
                 InputStatusList[(int)InputType.P1FIRE] = true;
-            }
-            else
-            {
-                InputStatusList[(int)InputType.P1FIRE] = false;
             }
         }
         void ControlAsset.IActionMapActions.OnP2UP(InputAction.CallbackContext context)

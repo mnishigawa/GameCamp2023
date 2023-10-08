@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using game;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -14,6 +15,7 @@ public class PlayerZou : game.PlayerBase
     // 弾発射
     protected override void Fire()
     {
+        Debug.Log("Fire");
         // 弾を生成
         GameObject obj = Instantiate(bulletobj);
         obj.transform.position = transform.position;
@@ -21,6 +23,7 @@ public class PlayerZou : game.PlayerBase
         // 発射方向の設定
         game.Bullet bullet = obj.GetComponent<game.Bullet>();
         bullet.SetAngle(game.Bullet.BulletAngle.DOWN);
+        bullet.Initialize(tileMap);
     }
 
     // 接触処理
@@ -35,7 +38,7 @@ public class PlayerZou : game.PlayerBase
         }
 
         // 接触タイル名取得
-        string name = base.GetCurrentTileName();
+        string name = game.GameMain.GetCurrentTile(transform.position, tileMap).name;
 
         if (name.Equals("Wall") == false &&
             name.Equals("OuterWall") == false &&
@@ -47,5 +50,19 @@ public class PlayerZou : game.PlayerBase
         }
 
         return false;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        var type = collision.gameObject.GetComponent<ObjectType>();
+
+        if(type != null)
+        {
+            if(type.type == game.GameMain.ObjectType.MINIUNI)
+            {
+                // みにうに消す
+                Destroy(collision.gameObject);
+            } 
+        }
     }
 }

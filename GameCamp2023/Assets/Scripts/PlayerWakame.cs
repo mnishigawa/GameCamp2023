@@ -8,6 +8,9 @@ public class PlayerWakame : game.PlayerBase
     [SerializeField]
     TileBase setTile;   // 設置するタイル
 
+    [SerializeField]
+    GameObject miniWakamePrefab;    // 生成するわかめ
+
     public override bool ReplaceTile()
     {// タイルとの接触処理
 
@@ -20,7 +23,7 @@ public class PlayerWakame : game.PlayerBase
         }
 
         // 接触タイル名取得
-        string name = base.GetCurrentTileName();
+        string name = game.GameMain.GetCurrentTile(transform.position, tileMap).name;
 
         if (name.Equals("Wall") == false &&
             name.Equals("OuterWall") == false &&
@@ -32,5 +35,21 @@ public class PlayerWakame : game.PlayerBase
         }
 
         return false;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        var type = collision.gameObject.GetComponent<ObjectType>();
+
+        if(type != null)
+        {
+            if(type.type == game.GameMain.ObjectType.WATER)
+            {
+                // みにわかめ生成
+                GameObject.Instantiate(miniWakamePrefab, transform.position, Quaternion.identity);
+                // 水消す
+                Destroy(collision.gameObject);
+            } 
+        }
     }
 }
