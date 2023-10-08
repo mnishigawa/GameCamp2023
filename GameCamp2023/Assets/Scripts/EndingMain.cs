@@ -19,9 +19,16 @@ namespace ending
 
         private EndingType endingType;    // エンディングの種類
 
+        [SerializeField]
+        private AudioClip[] bgm;
+
+        private AudioSource audioSource;
+
         // Start is called before the first frame update
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+
             int nZouScore = game.GameMain.instance.GetScore(game.GameMain.PlayerIndex.ZOU);
             int nUniScore = game.GameMain.instance.GetScore(game.GameMain.PlayerIndex.UNI);
 
@@ -33,11 +40,14 @@ namespace ending
             {
                 endingType = EndingType.UNIWIN;
             }
+            audioSource.clip = bgm[(int)endingType];
+            audioSource.Play();
 
             foreach (var obj in EndingObject)
             {
                 obj.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
             }
+
         }
 
         // Update is called once per frame

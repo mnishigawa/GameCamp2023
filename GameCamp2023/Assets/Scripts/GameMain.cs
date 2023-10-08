@@ -69,6 +69,18 @@ namespace game
 
         public Image FinishImage;
 
+        [SerializeField]
+        private AudioClip bgm;
+
+        [SerializeField]
+        private AudioClip finish;
+
+        [SerializeField]
+        private AudioClip countdown;
+
+        private AudioSource audioSource;
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -84,6 +96,11 @@ namespace game
             {
                 player.Initialize(tilemap);
             }
+
+            audioSource = GetComponent<AudioSource>();
+            audioSource.PlayOneShot(countdown);
+            audioSource.clip = bgm;
+            audioSource.Play();
 
             // カウントダウン開始
             isGameActive = false;
@@ -108,15 +125,17 @@ namespace game
                 if (isFinishEventEnd)
                 {
                     // 終了処理
+                    audioSource.Stop();
                     SceneManager.LoadScene("EndingScene", LoadSceneMode.Single);
                     isFinishEventEnd = false;
                     return;
                 }
 
-                if(isInFinishEvent == false)
+                if (isInFinishEvent == false)
                 {
                     StartCoroutine(FinishEventCoroutine());
                     isInFinishEvent = true;
+                    audioSource.PlayOneShot(finish);
                 }
                 return;
             }
